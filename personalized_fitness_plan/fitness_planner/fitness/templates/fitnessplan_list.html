@@ -1,0 +1,11 @@
+<h2>Fitness Plans</h2>
+<a href="{% url 'fitnessplan_create' %}">Create New Plan</a>
+<ul>
+    {% for plan in plans %}
+        <li>
+            {{ plan.name }} - {{ plan.goal }} ({{ plan.fitness_level }})
+            <a href="{% url 'fitnessplan_update' plan.pk %}">Edit</a>
+            <a href="{% url 'fitnessplan_delete' plan.pk %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>

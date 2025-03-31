@@ -8,5 +8,31 @@
             <a href="{% url 'fitnessplan_delete' plan.pk %}">Delete</a>
         </li>
     {% endfor %}
-</ul>
+</ul> 
+
+<!-- <ul>
+    {% for plan in plans %}
+        <li id="plan-{{ plan.id }}">
+            {{ plan.name }} - {{ plan.goal }} ({{ plan.fitness_level }})
+            <button hx-get="{% url 'fitnessplan_edit' plan.id %}" hx-target="#form-container" hx-swap="innerHTML">Edit</button>
+            <button hx-delete="{% url 'fitnessplan_delete' plan.id %}" hx-target="#plan-{{ plan.id }}" hx-swap="outerHTML">Delete</button>
+        </li>
+    {% endfor %}
+</ul> -->
+
+{% for plan in plans %}
+    <div id="plan-{{ plan.id }}">
+        <p>{{ plan.name }} - {{ plan.goal }} ({{ plan.fitness_level }})</p>
+        <a href="{% url 'fitnessplan_confirm_delete' plan.id %}" 
+           hx-get="{% url 'fitnessplan_confirm_delete' plan.id %}" 
+           hx-target="#dialog" 
+           hx-swap="innerHTML">
+        <a href="{% url 'fitnessplan_confirm_delete' plan.id %}">
+            Delete
+        </a>
+    </div>
+{% endfor %}
+ <!-- Dialog container for the confirmation popup
+<div id="dialog"></div> 
+
 

@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        /* Style for loading indicator */
+        .htmx-indicator {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>HTMX CRUD Demo</h1>
+
+    <!-- Add Item Form -->
+    <form hx-post="{% url 'add_item' %}" 
+          hx-target="#item-list" 
+          hx-swap="innerHTML"
+          hx-indicator=".loading-spinner">
+        <input type="text" name="item" placeholder="New Item" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Loading Indicator -->
+    <div class="loading-spinner htmx-indicator">
+        <p>Loading...</p>
+    </div>
+
+    <!-- List of Items -->
+    <div id="item-list" hx-get="{% url 'load_items' %}" hx-trigger="load">
+        <!-- Items will be loaded here -->
+    </div>
+
+</body>
+</html>
